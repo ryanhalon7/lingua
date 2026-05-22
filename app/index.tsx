@@ -1,5 +1,7 @@
+import { Feather } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "@/constants/images";
@@ -105,6 +107,14 @@ export default function Index() {
                 />
                 <Text className="brand__wordmark">lingua</Text>
               </View>
+              <Link href="/onboarding" asChild>
+                <TouchableOpacity activeOpacity={0.88} style={styles.onboardingLink}>
+                  <Text className="font-poppins-semibold text-[16px] leading-[22px] text-white">
+                    Open Onboarding
+                  </Text>
+                  <Feather name="chevron-right" size={22} color="#FFFFFF" />
+                </TouchableOpacity>
+              </Link>
             </View>
 
             {/* Colors Section */}
@@ -179,5 +189,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 82,
     width: 108,
+  },
+  onboardingLink: {
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: colors.primary.linguaDeepPurple,
+    borderBottomColor: "#402BD6",
+    borderBottomWidth: 3,
+    borderRadius: 16,
+    flexDirection: "row",
+    gap: 8,
+    justifyContent: "center",
+    minHeight: 54,
+    paddingHorizontal: 22,
   },
 });
