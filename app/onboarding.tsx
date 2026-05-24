@@ -93,7 +93,7 @@ export default function OnboardingScreen() {
           </View>
 
           {/* Button */}
-          <Link href="/" asChild>
+          <Link href="/sign-up" asChild>
             <TouchableOpacity activeOpacity={0.88} style={styles.primaryButton}>
               <Text className="font-poppins-semibold text-[14px] leading-[0px] text-white mt-1">
                 Get Started
