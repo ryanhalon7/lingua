@@ -61,30 +61,45 @@ Reusable hook for search state management:
 import { useEffect, useState } from "react";
 import { useNavigation } from "expo-router";
 
-export function useSearch(options: any = {}) {
+interface SearchOptions {
+  onChangeText?: (event: any) => void;
+  onSearchButtonPress?: (event: any) => void;
+  onCancelButtonPress?: (event: any) => void;
+  placeholder?: string;
+  [key: string]: any;
+}
+
+export function useSearch(options: SearchOptions = {}) {
   const [search, setSearch] = useState("");
   const navigation = useNavigation();
+
+  const {
+    onChangeText,
+    onSearchButtonPress,
+    onCancelButtonPress,
+    ...rest
+  } = options;
 
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
       headerSearchBarOptions: {
-        ...options,
+        ...rest,
         onChangeText(e: any) {
           setSearch(e.nativeEvent.text);
-          options.onChangeText?.(e);
+          onChangeText?.(e);
         },
         onSearchButtonPress(e: any) {
           setSearch(e.nativeEvent.text);
-          options.onSearchButtonPress?.(e);
+          onSearchButtonPress?.(e);
         },
         onCancelButtonPress(e: any) {
           setSearch("");
-          options.onCancelButtonPress?.(e);
+          onCancelButtonPress?.(e);
         },
       },
     });
-  }, [options, navigation]);
+  }, [navigation, onChangeText, onSearchButtonPress, onCancelButtonPress]);
 
   return search;
 }

@@ -118,7 +118,7 @@ Follow Apple Human Interface Guidelines.
 - Prefer padding over margin where possible
 - Always account for safe area, either with stack headers, tabs, or ScrollView/FlatList `contentInsetAdjustmentBehavior="automatic"`
 - Ensure both top and bottom safe area insets are accounted for
-- Inline styles not StyleSheet.create unless reusing styles is faster
+- Use NativeWind className prop for styling; use inline styles or StyleSheet only for React Native exceptions (SafeAreaView, KeyboardAvoidingView, Modal, ScrollView contentContainerStyle, TextInput, Animated.View, dynamic styles, pressed states, shadows, transforms, z-index)
 - Add entering and exiting animations for state changes
 - Use `{ borderCurve: 'continuous' }` for rounded corners unless creating a capsule shape
 - ALWAYS use a navigation stack title instead of a custom text element on the page

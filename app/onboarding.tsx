@@ -36,8 +36,8 @@ export default function OnboardingScreen() {
               <Image
                 source={images.mascotLogo}
                 contentFit="contain"
-                style={styles.logoImage}
-              />
+                 className="h-16 w-16"
+              />              
               <Text className="font-poppins-bold h2 text-text-primary">
                 lingua
               </Text>
@@ -88,16 +88,16 @@ export default function OnboardingScreen() {
             <Image
               source={images.mascotWelcome}
               contentFit="contain"
-              style={styles.welcomeMascot}
+              className="absolute h-[360px] w-[360px] left-0 top-[-10px]"
             />
           </View>
 
           {/* Button */}
           <Link href="/sign-up" asChild>
             <TouchableOpacity activeOpacity={0.88} style={styles.primaryButton}>
-              <Text className="font-poppins-semibold text-[14px] leading-[0px] text-white mt-1">
-                Get Started
-              </Text>
+              <Text className="font-poppins-semibold text-[14px] text-white">
+                 Get Started
+               </Text>            
               <Feather name="chevron-right" size={28} color="#FFFFFF" />
             </TouchableOpacity>
           </Link>
@@ -151,13 +151,7 @@ const styles = StyleSheet.create({
     height: 64,
     width: 64,
   },
-  welcomeMascot: {
-    height: 360,
-    left: 0,
-    position: "absolute",
-    top: -10,
-    width: 360,
-  },
+
   primaryButton: {
     alignItems: "center",
     alignSelf: "stretch",

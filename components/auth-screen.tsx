@@ -41,7 +41,7 @@ const authCopy = {
     bottomText: "Already have an account?",
     bottomAction: "Log in",
     bottomHref: "/sign-in",
-    initialEmail: "alex@gmail.com",
+    initialEmail: "",
   },
   "sign-in": {
     title: "Welcome back",
@@ -50,7 +50,7 @@ const authCopy = {
     bottomText: "Don't have an account?",
     bottomAction: "Sign up",
     bottomHref: "/sign-up",
-    initialEmail: "alex@gmail.com",
+    initialEmail: "",
   },
 } as const;
 
@@ -217,7 +217,7 @@ function VerificationModal({
 export function AuthScreen({ mode }: AuthScreenProps) {
   const copy = authCopy[mode];
   const [email, setEmail] = useState<string>(copy.initialEmail);
-  const [password, setPassword] = useState<string>("password1");
+  const [password, setPassword] = useState<string>("");  
   const [isVerificationVisible, setIsVerificationVisible] = useState(false);
   const isSignUp = mode === "sign-up";
 

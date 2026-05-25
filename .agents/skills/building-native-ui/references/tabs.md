@@ -189,20 +189,28 @@ Use `hidden` prop on `NativeTabs` to hide the entire tab bar dynamically:
 
 ```tsx
 import { NativeTabs } from "expo-router/unstable-native-tabs";
-import { useState } from "react";
+import { useShallow } from "zustand/react";
+import { create } from "zustand";
+import { SymbolView } from "expo-symbols";
 import { Pressable, Text, View } from "react-native";
 
-function MiniPlayer({
-  isPlaying,
-  onToggle,
-}: {
-  isPlaying: boolean;
-  onToggle: () => void;
-}) {
+// External store for playback state (lives outside TabLayout)
+const usePlayerStore = create((set) => ({
+  isPlaying: false,
+  setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
+}));
+
+function MiniPlayer() {
+  const { isPlaying, setIsPlaying } = usePlayerStore(
+    useShallow((state) => ({
+      isPlaying: state.isPlaying,
+      setIsPlaying: state.setIsPlaying,
+    }))
+  );
   const placement = NativeTabs.BottomAccessory.usePlacement();
   if (placement === "inline") {
     return (
-      <Pressable onPress={onToggle}>
+      <Pressable onPress={() => setIsPlaying(!isPlaying)}>
         <SymbolView name={isPlaying ? "pause.fill" : "play.fill"} />
       </Pressable>
     );
@@ -211,14 +219,10 @@ function MiniPlayer({
 }
 
 export default function TabLayout() {
-  const [isPlaying, setIsPlaying] = useState(false);
   return (
     <NativeTabs>
       <NativeTabs.BottomAccessory>
-        <MiniPlayer
-          isPlaying={isPlaying}
-          onToggle={() => setIsPlaying(!isPlaying)}
-        />
+        <MiniPlayer />
       </NativeTabs.BottomAccessory>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
